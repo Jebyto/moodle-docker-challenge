@@ -124,21 +124,13 @@ RUN a2enmod \
         expires \
         headers \
         rewrite \
-    && sed -ri "s#/var/www/html#${MOODLE_DIR}/public#g" /etc/apache2/sites-available/000-default.conf \
-    && echo "ServerName localhost" > /etc/apache2/conf-available/servername.conf \
-    && { \
-        echo "<Directory ${MOODLE_DIR}/public>"; \
-        echo "    Options -Indexes +FollowSymLinks"; \
-        echo "    AllowOverride None"; \
-        echo "    Require all granted"; \
-        echo "    DirectoryIndex index.php"; \
-        echo "    FallbackResource /r.php"; \
-        echo "    AcceptPathInfo On"; \
-        echo "</Directory>"; \
-    } > /etc/apache2/conf-available/moodle.conf \
-    && a2enconf servername \
-    && a2enconf moodle
+    && sed -ri "s#/var/www/html#${MOODLE_DIR}/public#g" /etc/apache2/sites-available/000-default.conf
 
+COPY docker/moodle/apache/moodle.conf /etc/apache2/conf-available/moodle.conf
+COPY docker/moodle/apache/servername.conf /etc/apache2/conf-available/servername.conf
+
+RUN a2enconf servername \
+    && a2enconf moodle
 
 # ------------------------------------------------------------------------------------
 # Copia Composer e o código do Moodle do Stage 1 para a imagem final

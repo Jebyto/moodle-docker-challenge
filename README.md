@@ -22,6 +22,7 @@ Implementado nesta branch:
 - Definição de volume para `/var/www/moodledata`.
 - Healthcheck HTTP simples para verificar resposta do Apache.
 - Estrutura prevista para plugins customizados em `/opt/moodle-custom-plugins`.
+- Entrypoint para preparar o diretório de dados e organizar plugins customizados no início do container.
 
 Ainda não está implementado ou versionado nesta branch:
 
@@ -30,7 +31,6 @@ Ainda não está implementado ou versionado nesta branch:
 - Arquivo `.env.example` preenchido com variáveis do ambiente.
 - Script de carga inicial das disciplinas e alunos.
 - Customização Moodle por plugin ou página.
-- Arquivo `docker/moodle/entrypoint.sh`, apesar de o Dockerfile já estar preparado para copiá-lo.
 
 ## Estrutura atual
 
@@ -40,6 +40,7 @@ Ainda não está implementado ou versionado nesta branch:
 ├── docker/
 │   └── moodle/
 │       ├── Dockerfile
+│       ├── entrypoint.sh
 │       └── apache/
 │           ├── moodle.conf
 │           └── servername.conf
@@ -48,7 +49,7 @@ Ainda não está implementado ou versionado nesta branch:
 
 ## Como executar
 
-No estado atual desta branch, a execução completa do ambiente ainda não está disponível. O `docker-compose.yml` permanece sem a definição dos serviços e o Dockerfile depende de `docker/moodle/entrypoint.sh`, que ainda não está versionado nesta branch.
+No estado atual desta branch, a execução completa do ambiente ainda não está disponível. O `docker-compose.yml` permanece sem a definição dos serviços necessários para subir Moodle e MySQL juntos.
 
 Quando esses pontos forem concluídos, o fluxo esperado será:
 
@@ -98,6 +99,8 @@ MOODLE_CUSTOM_PLUGIN_PATHS="local blocks"
 ```
 
 A intenção é permitir que plugins dos tipos `local` e `blocks` sejam fornecidos por bind mount e aplicados durante a inicialização do container.
+
+O `entrypoint.sh` foi adicionado como apoio a essa organização: ele prepara os diretórios necessários e copia plugins customizados para os caminhos esperados pelo Moodle quando o container inicia.
 
 ## Relação com o desafio
 

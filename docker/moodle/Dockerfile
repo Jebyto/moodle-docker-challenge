@@ -120,10 +120,12 @@ RUN { \
 # ------------------------------------------------------------------------------------
 
 RUN a2enmod \
+        dir \
         expires \
         headers \
         rewrite \
     && sed -ri "s#/var/www/html#${MOODLE_DIR}/public#g" /etc/apache2/sites-available/000-default.conf \
+    && echo "ServerName localhost" > /etc/apache2/conf-available/servername.conf \
     && { \
         echo "<Directory ${MOODLE_DIR}/public>"; \
         echo "    Options -Indexes +FollowSymLinks"; \
@@ -134,6 +136,7 @@ RUN a2enmod \
         echo "    AcceptPathInfo On"; \
         echo "</Directory>"; \
     } > /etc/apache2/conf-available/moodle.conf \
+    && a2enconf servername \
     && a2enconf moodle
 
 

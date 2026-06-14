@@ -1,0 +1,69 @@
+name: ${COMPOSE_PROJECT_NAME:-moodle_docker_challenge}
+
+services:
+  mysql:
+    image: mysql:8.4
+    restart: unless-stopped
+    # utf8mb4 evita problemas com caracteres completos usados pelo Moodle.
+    command:
+      - --character-set-server=utf8mb4
+      - --collation-server=utf8mb4_unicode_ci
+      - --max_allowed_packet=64M
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD:-change_me_root_password}
+      MYSQL_DATABASE: ${MYSQL_DATABASE:-moodle}
+      MYSQL_USER: ${MYSQL_USER:-moodle}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD:-change_me_moodle_password}
+    volumes:
+      - mysql_data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD-SHELL", "mysqladmin ping -h 127.0.0.1 -u root -p$${MYSQL_ROOT_PASSWORD} --silent"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+      start_period: 30s
+    networks:
+      - moodle_network
+
+  moodle:
+    build:
+      context: .
+      dockerfile: docker/moodle/Dockerfile
+    restart: unless-stopped
+    environment:
+      MOODLE_WWWROOT: ${MOODLE_WWWROOT:-http://localhost:8080}
+      MOODLE_DATA_DIR: ${MOODLE_DATA_DIR:-/var/www/moodledata}
+      MOODLE_DB_TYPE: ${MOODLE_DB_TYPE:-mysqli}
+      MOODLE_DB_HOST: ${MOODLE_DB_HOST:-mysql}
+      MOODLE_DB_PORT: ${MOODLE_DB_PORT:-3306}
+      # Usa as mesmas credenciais que criam o banco no container MySQL.
+      MOODLE_DB_NAME: ${MYSQL_DATABASE:-moodle}
+      MOODLE_DB_USER: ${MYSQL_USER:-moodle}
+      MOODLE_DB_PASSWORD: ${MYSQL_PASSWORD:-change_me_moodle_password}
+      MOODLE_DB_PREFIX: ${MOODLE_DB_PREFIX:-mdl_}
+      MOODLE_DB_COLLATION: ${MOODLE_DB_COLLATION:-utf8mb4_unicode_ci}
+      MOODLE_DB_SOCKET: ${MOODLE_DB_SOCKET:-}
+      MOODLE_ADMIN_DIR: ${MOODLE_ADMIN_DIR:-admin}
+      MOODLE_SSL_PROXY: ${MOODLE_SSL_PROXY:-false}
+      MOODLE_REVERSE_PROXY: ${MOODLE_REVERSE_PROXY:-false}
+      MOODLE_CUSTOM_PLUGIN_PATHS: ${MOODLE_CUSTOM_PLUGIN_PATHS:-local blocks}
+    ports:
+      - "${MOODLE_PORT:-8080}:80"
+    volumes:
+      # O config.php fica fora da imagem para ler o ambiente definido pelo Compose.
+      - ./config/config.php:/var/www/moodle/config.php:ro
+      - ./plugins:/opt/moodle-custom-plugins:ro
+      - moodledata:/var/www/moodledata
+    depends_on:
+      mysql:
+        condition: service_healthy
+    networks:
+      - moodle_network
+
+volumes:
+  mysql_data:
+  moodledata:
+
+networks:
+  moodle_network:
+    driver: bridge

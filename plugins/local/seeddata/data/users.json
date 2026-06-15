@@ -1,0 +1,92 @@
+[
+  {
+    "username": "student01",
+    "password": "ChangeMe123!",
+    "firstname": "João",
+    "lastname": "Silva",
+    "email": "student01@example.test",
+    "city": "Fortaleza",
+    "country": "BR"
+  },
+  {
+    "username": "student02",
+    "password": "ChangeMe123!",
+    "firstname": "Maria",
+    "lastname": "Oliveira",
+    "email": "student02@example.test",
+    "city": "Recife",
+    "country": "BR"
+  },
+  {
+    "username": "student03",
+    "password": "ChangeMe123!",
+    "firstname": "Pedro",
+    "lastname": "Santos",
+    "email": "student03@example.test",
+    "city": "Salvador",
+    "country": "BR"
+  },
+  {
+    "username": "student04",
+    "password": "ChangeMe123!",
+    "firstname": "Ana",
+    "lastname": "Costa",
+    "email": "student04@example.test",
+    "city": "Natal",
+    "country": "BR"
+  },
+  {
+    "username": "student05",
+    "password": "ChangeMe123!",
+    "firstname": "Lucas",
+    "lastname": "Pereira",
+    "email": "student05@example.test",
+    "city": "São Luís",
+    "country": "BR"
+  },
+  {
+    "username": "student06",
+    "password": "ChangeMe123!",
+    "firstname": "Julia",
+    "lastname": "Almeida",
+    "email": "student06@example.test",
+    "city": "Belem",
+    "country": "BR"
+  },
+  {
+    "username": "student07",
+    "password": "ChangeMe123!",
+    "firstname": "Rafael",
+    "lastname": "Lima",
+    "email": "student07@example.test",
+    "city": "Manaus",
+    "country": "BR"
+  },
+  {
+    "username": "student08",
+    "password": "ChangeMe123!",
+    "firstname": "Beatriz",
+    "lastname": "Fernandes",
+    "email": "student08@example.test",
+    "city": "Brasilia",
+    "country": "BR"
+  },
+  {
+    "username": "student09",
+    "password": "ChangeMe123!",
+    "firstname": "Carlos",
+    "lastname": "Rodrigues",
+    "email": "student09@example.test",
+    "city": "Curitiba",
+    "country": "BR"
+  },
+  {
+    "username": "student10",
+    "password": "ChangeMe123!",
+    "firstname": "Mariana",
+    "lastname": "Gomes",
+    "email": "student10@example.test",
+    "city": "Porto Alegre",
+    "country": "BR"
+  }
+]

@@ -1,0 +1,62 @@
+[
+  {
+    "shortname": "SEED-PORTUGUES",
+    "fullname": "Português",
+    "idnumber": "seed-portugues",
+    "summary": "Curso introdutório de língua portuguesa, leitura e produção textual."
+  },
+  {
+    "shortname": "SEED-MATEMATICA",
+    "fullname": "Matemática",
+    "idnumber": "seed-matematica",
+    "summary": "Curso introdutório de matemática com foco em fundamentos e resolução de problemas."
+  },
+  {
+    "shortname": "SEED-HISTORIA",
+    "fullname": "História",
+    "idnumber": "seed-historia",
+    "summary": "Curso de história geral e brasileira com atividades de interpretação."
+  },
+  {
+    "shortname": "SEED-GEOGRAFIA",
+    "fullname": "Geografia",
+    "idnumber": "seed-geografia",
+    "summary": "Curso de geografia física, humana e leitura de mapas."
+  },
+  {
+    "shortname": "SEED-CIENCIAS",
+    "fullname": "Ciências",
+    "idnumber": "seed-ciencias",
+    "summary": "Curso introdutório de ciências naturais e pensamento científico."
+  },
+  {
+    "shortname": "SEED-INGLES",
+    "fullname": "Inglês",
+    "idnumber": "seed-ingles",
+    "summary": "Curso básico de inglês com vocabulário, leitura e conversação inicial."
+  },
+  {
+    "shortname": "SEED-FISICA",
+    "fullname": "Fisica",
+    "idnumber": "seed-fisica",
+    "summary": "Curso de física com conceitos iniciais de movimento, energia e forças."
+  },
+  {
+    "shortname": "SEED-QUIMICA",
+    "fullname": "Quimica",
+    "idnumber": "seed-quimica",
+    "summary": "Curso introdutório de química, matéria, átomos e transformações."
+  },
+  {
+    "shortname": "SEED-BIOLOGIA",
+    "fullname": "Biologia",
+    "idnumber": "seed-biologia",
+    "summary": "Curso de biologia com foco em seres vivos, células e ecossistemas."
+  },
+  {
+    "shortname": "SEED-ARTES",
+    "fullname": "Artes",
+    "idnumber": "seed-artes",
+    "summary": "Curso de artes com práticas criativas, história da arte e apreciação visual."
+  }
+]

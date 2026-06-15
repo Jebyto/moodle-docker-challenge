@@ -27,7 +27,8 @@ use stdClass;
  * @copyright 2026 José Carlos
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-class user_seeder {
+class user_seeder
+{
 
     /**
      * Creates users described in JSON data, skipping users that already exist.
@@ -35,7 +36,8 @@ class user_seeder {
      * @param array $usersdata User seed data.
      * @return stdClass[] Users indexed by username.
      */
-    public function seed(array $usersdata): array {
+    public function seed(array $usersdata): array
+    {
         global $DB, $CFG;
 
         $users = [];
@@ -67,7 +69,7 @@ class user_seeder {
                 'timezone' => '99',
             ];
 
-            $user->id = user_create_user($user, false, false);
+            $user->id = user_create_user($user, true, false);
             cli_writeln("Created user: {$username}");
 
             $users[$username] = $DB->get_record('user', ['id' => $user->id], '*', MUST_EXIST);
@@ -83,7 +85,8 @@ class user_seeder {
      * @param array $fields Required fields.
      * @return void
      */
-    private function require_fields(array $userdata, array $fields): void {
+    private function require_fields(array $userdata, array $fields): void
+    {
         foreach ($fields as $field) {
             if (empty($userdata[$field])) {
                 cli_error("Missing required user field '{$field}'.");

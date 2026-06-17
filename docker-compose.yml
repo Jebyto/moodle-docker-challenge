@@ -60,6 +60,36 @@ services:
     networks:
       - moodle_network
 
+  # Serviço utilitário para compilar JavaScript AMD dos plugins customizados.
+  # Não faz parte do runtime do Moodle; roda apenas quando chamado pelo profile "tools".
+  moodle-js:
+    build:
+      context: .
+      dockerfile: docker/moodle/Dockerfile
+      target: moodle-js-builder
+    profiles:
+      - tools
+    working_dir: /var/www/moodle
+
+    # Executa o Grunt na raiz do Moodle e ajusta a posse dos arquivos gerados em amd/build.
+    command:
+      - sh
+      - -ceu
+      - |
+        node_modules/.bin/grunt amd
+        find public/local public/blocks -path '*/amd/build' -type d \
+          -exec chown -R "$${MOODLE_JS_UID}:$${MOODLE_JS_GID}" {} +
+
+    environment:
+      MOODLE_JS_UID: ${MOODLE_JS_UID:-1000}
+      MOODLE_JS_GID: ${MOODLE_JS_GID:-1000}
+      NPM_CONFIG_CACHE: /tmp/.npm
+
+    # Monta apenas os diretórios de plugins, sem sobrescrever toda a pasta public/ do Moodle.
+    volumes:
+      - ./plugins/local:/var/www/moodle/public/local
+      - ./plugins/blocks:/var/www/moodle/public/blocks
+
 volumes:
   mysql_data:
   moodledata:

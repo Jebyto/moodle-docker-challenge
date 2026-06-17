@@ -22,7 +22,27 @@ RUN mkdir -p /src \
     && rm -rf /src/moodle/.git
 
 # ------------------------------------------------------------------------------------
-# Stage 2: Imagem final com PHP e Apache configurados para a versão do Moodle
+# Stage 2: Ferramentas de build JavaScript do Moodle
+#
+# Mantem Node/Grunt fora da imagem final. Este target e usado sob demanda pelo Compose
+# para gerar os arquivos minificados de plugins em amd/build.
+# ------------------------------------------------------------------------------------
+
+FROM node:22-bookworm AS moodle-js-builder
+
+ARG MOODLE_VERSION=v5.2.1
+
+ENV MOODLE_DIR=/var/www/moodle
+
+COPY --from=moodle-source /src/moodle ${MOODLE_DIR}
+
+WORKDIR ${MOODLE_DIR}
+
+RUN --mount=type=cache,target=/root/.npm \
+    npm ci --no-audit --no-fund
+
+# ------------------------------------------------------------------------------------
+# Stage 3: Imagem final com PHP e Apache configurados para a versão do Moodle
 # ------------------------------------------------------------------------------------
 
 FROM php:8.3-apache-bookworm

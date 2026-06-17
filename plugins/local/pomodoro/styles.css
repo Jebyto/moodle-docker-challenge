@@ -1,0 +1,60 @@
+/* Layout that Boost/Bootstrap does not provide directly for this interaction. */
+.local-pomodoro-floating {
+    bottom: 1.25rem;
+    display: none;
+    position: fixed;
+    right: 1.25rem;
+    text-align: left;
+    z-index: 1050;
+}
+
+.local-pomodoro-floating.is-visible {
+    align-items: center;
+    display: flex;
+}
+
+.local-pomodoro-panel {
+    bottom: 5rem;
+    display: none;
+    max-width: calc(100vw - 2rem);
+    position: fixed;
+    right: 1.25rem;
+    width: 25rem;
+    z-index: 1051;
+}
+
+.local-pomodoro-panel.is-open {
+    display: block;
+}
+
+.local-pomodoro-panel__close {
+    height: 2rem;
+    line-height: 1;
+    padding: 0;
+    width: 2rem;
+}
+
+.local-pomodoro-fullscreen {
+    margin: 0 auto;
+    max-width: 56rem;
+}
+
+.local-pomodoro-fullscreen__timer {
+    line-height: 1;
+}
+
+@media (max-width: 480px) {
+    .local-pomodoro-floating {
+        bottom: 0.875rem;
+        left: 0.875rem;
+        right: 0.875rem;
+        justify-content: center;
+    }
+
+    .local-pomodoro-panel {
+        bottom: 4.75rem;
+        left: 0.875rem;
+        right: 0.875rem;
+        width: auto;
+    }
+}

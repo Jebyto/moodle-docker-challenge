@@ -1,0 +1,92 @@
+{{!
+    This file is part of Moodle - http://moodle.org/
+
+    Moodle is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    Moodle is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with Moodle. If not, see <http://www.gnu.org/licenses/>.
+}}
+{{!
+    @template local_pomodoro/floating
+
+    Global floating Pomodoro timer and panel.
+}}
+<div data-pomodoro-floating-wrapper>
+    <button type="button" class="local-pomodoro-floating btn btn-dark rounded-pill shadow"
+            data-pomodoro-floating aria-label="{{expandtimer}}">
+        <span class="h5 mb-0 mr-2" data-pomodoro-floating-time>25:00</span>
+        <span class="small text-left">
+            <span class="d-block" data-pomodoro-floating-phase>{{focus}}</span>
+            <span class="d-block" data-pomodoro-floating-cycle>{{currentcycle}} 1</span>
+        </span>
+    </button>
+
+    <section class="local-pomodoro-panel card shadow" data-pomodoro-panel aria-live="polite">
+        <div class="card-body">
+            <div class="d-flex justify-content-between align-items-start mb-3">
+                <div>
+                    <span class="d-block small text-muted text-uppercase font-weight-bold" data-pomodoro-panel-phase>{{focus}}</span>
+                    <span class="h2 d-block mb-0" data-pomodoro-panel-time>25:00</span>
+                </div>
+                <button type="button" class="btn btn-light border rounded-circle local-pomodoro-panel__close"
+                        data-pomodoro-panel-close aria-label="{{closepanel}}">
+                    &times;
+                </button>
+            </div>
+
+            <div class="border rounded bg-light p-2 mb-3">
+                <span class="d-block">{{remainingtime}}: <strong data-pomodoro-panel-time-inline>25:00</strong></span>
+                <span class="d-block">{{currentcycle}}: <strong data-pomodoro-panel-cycle>1</strong></span>
+            </div>
+
+            <div class="d-flex flex-wrap mb-3">
+                <button type="button" class="btn btn-secondary mr-2 mb-2" data-pomodoro-pause>{{pause}}</button>
+                <button type="button" class="btn btn-outline-danger mr-2 mb-2" data-pomodoro-cancel>{{cancel}}</button>
+                <a class="btn btn-link mb-2" data-pomodoro-fullscreen-link href="{{fullscreenurl}}">{{openfullscreen}}</a>
+            </div>
+
+            <div class="border-top pt-3">
+                <span class="d-block small font-weight-bold mb-2">{{settings}}</span>
+                <div class="form-row">
+                    <label class="form-group col-12 mb-2">
+                        <span class="d-flex justify-content-between small font-weight-bold">
+                            <span>{{focus}}</span>
+                            <span class="text-muted" data-pomodoro-range-output>25min</span>
+                        </span>
+                        <input class="custom-range" type="range" min="30" max="1800" step="30" value="1500" data-pomodoro-panel-field="focusDurationSeconds">
+                    </label>
+                    <label class="form-group col-12 mb-2">
+                        <span class="d-flex justify-content-between small font-weight-bold">
+                            <span>{{shortbreak}}</span>
+                            <span class="text-muted" data-pomodoro-range-output>5min</span>
+                        </span>
+                        <input class="custom-range" type="range" min="30" max="1800" step="30" value="300" data-pomodoro-panel-field="shortBreakDurationSeconds">
+                    </label>
+                    <label class="form-group col-12 mb-2">
+                        <span class="d-flex justify-content-between small font-weight-bold">
+                            <span>{{longbreak}}</span>
+                            <span class="text-muted" data-pomodoro-range-output>15min</span>
+                        </span>
+                        <input class="custom-range" type="range" min="30" max="1800" step="30" value="900" data-pomodoro-panel-field="longBreakDurationSeconds">
+                    </label>
+                    <label class="form-group col-12 mb-2">
+                        <span class="d-flex justify-content-between small font-weight-bold">
+                            <span>{{cyclesbeforelongbreak}}</span>
+                            <span class="text-muted" data-pomodoro-range-output>4</span>
+                        </span>
+                        <input class="custom-range" type="range" min="1" max="10" step="1" value="4" data-pomodoro-panel-field="cyclesBeforeLongBreak">
+                    </label>
+                </div>
+                <button type="button" class="btn btn-primary" data-pomodoro-save-settings>{{savesettings}}</button>
+            </div>
+        </div>
+    </section>
+</div>
